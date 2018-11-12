@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="body">
+        <link name="base_link">
+            <visual>
+                <geometry>
+                    <mesh filename="package://car_description/meshes/body.stl"/>
+                </geometry>
+                <material name="white">
+                    <color rgba="0.7 0.7 0.7 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0.0256" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.380 0.120 0.072"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="1"/>
+                <inertia ixx="0.001632" ixy="0.000000" ixz="0.0000000"
+                                        iyy="0.012465" iyz="0.0000000"
+                                                       izz="0.0132333"/>
+            </inertial>
+        </link>
+        <gazebo reference="base_link">
+            <material>Gazebo/Grey</material>
+        </gazebo>
+    </xacro:macro>
+</robot>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>car_description</name>
+  <version>0.0.0</version>
+  <description>Description for 6 wheels car model</description>
+
+  <maintainer email="markovalex95@gmail.com">Markov Alexey</maintainer>
+  <license>TODO</license>
+  <author email="markovalex95@gmail.com">Markov Alexey</author>  
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+  </export>
+</package>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="wheel" params="parent side x_pos name">
+
+        <xacro:left_right side="${side}"/>
+        <xacro:property name="wheel_width" value="0.06" />
+
+
+        <link name="${name}">
+            <visual>                
+                <geometry>
+                    <mesh filename="package://car_description/meshes/wheel_${side}.stl"/>
+                </geometry>
+                <material name="black">
+                    <color rgba="0.175 .175 .175 1.0"/>
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0 ${x_sign * (wheel_width/2 + 0.002)} 0" rpy="1.5707 0 0"/>
+                <geometry>
+                    <cylinder radius="0.063" length="0.06"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.1"/>
+                <inertia ixx="0.00012923" ixy="0.00000000" ixz="0000000"
+                                          iyy="0.00012923" iyz="0000000"
+                                                           izz="0.00315"/>
+            </inertial>
+        </link>
+        <gazebo reference="${name}">
+            <material>Gazebo/DarkGrey</material>
+        </gazebo>
+
+        <joint name="${name}_joint" type="continuous">
+            <parent link="${parent}"/>
+            <child  link="${name}"/>
+            <origin xyz="${x_pos} ${x_sign*0.083} 0" rpy="0 0 0"/>
+            <axis xyz="0 -1 0"/>
+        </joint>
+
+    </xacro:macro>    
+</robot>
