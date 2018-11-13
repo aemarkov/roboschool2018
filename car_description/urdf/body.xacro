@@ -18,10 +18,10 @@
                 </geometry>
             </collision>
             <inertial>
-                <mass value="1"/>
-                <inertia ixx="0.001632" ixy="0.000000" ixz="0.0000000"
-                                        iyy="0.012465" iyz="0.0000000"
-                                                       izz="0.0132333"/>
+                <mass value="3.3"/>
+                <inertia ixx="0.005386" ixy="0.000000" ixz="0.00000"
+                                        iyy="0.041136" iyz="0.00000"
+                                                       izz="0.04367"/>
             </inertial>
         </link>
         <gazebo reference="base_link">

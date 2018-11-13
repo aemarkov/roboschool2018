@@ -19,7 +19,7 @@
             <p>0.2</p>
             <i>0.0</i>
             <d>0.0</d>
-            <max_velocity>15.0</max_velocity>
+            <max_velocity>17.0</max_velocity>
         </plugin>        
     </gazebo>
 </robot>
