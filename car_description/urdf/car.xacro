@@ -7,10 +7,19 @@
     <xacro:property name="wheel_stride" value="0.150" />    
 
     <xacro:body/>
-    <xacro:wheel parent="base_link" side="left" x_pos="${-wheel_stride}" name="wheel_left_1"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="${-wheel_stride}" name="wheel_right_1"/>
-    <xacro:wheel parent="base_link" side="left" x_pos="0" name="wheel_left_2"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="0" name="wheel_right_2"/>
-    <xacro:wheel parent="base_link" side="left" x_pos="${wheel_stride}" name="wheel_left_3"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="${wheel_stride}" name="wheel_right_3"/>
+    <xacro:wheel parent="base_link" side="left" x_pos="${-wheel_stride}" name="wheel_1_left"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="${-wheel_stride}" name="wheel_1_right"/>
+    <xacro:wheel parent="base_link" side="left" x_pos="0" name="wheel_2_left"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="0" name="wheel_2_right"/>
+    <xacro:wheel parent="base_link" side="left" x_pos="${wheel_stride}" name="wheel_3_left"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="${wheel_stride}" name="wheel_3_right"/>
+
+    <gazebo>
+        <plugin name="car_plugin" filename="libcar_plugin.so">
+            <p>0.2</p>
+            <i>0.0</i>
+            <d>0.0</d>
+            <max_velocity>15.0</max_velocity>
+        </plugin>        
+    </gazebo>
 </robot>

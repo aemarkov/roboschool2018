@@ -7,10 +7,6 @@
     </include>
 
     <!-- Load xacro, convert to URDF and spawn-->
-    <arg name="xacro_filename" value="$(find car_description)/urdf/car.xacro"/>
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg xacro_filename)'"/>    
-
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-          args="-urdf -model car -x 0 -y 0 -z 0.3 -param robot_description"/>
+    <include file="$(find car_gazebo)/launch/spawn.launch"/>
 
 </launch>
