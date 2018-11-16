@@ -3,8 +3,10 @@
     <xacro:include filename="left_right.xacro"/>
     <xacro:include filename="body.xacro"/>
     <xacro:include filename="wheel.xacro"/>
+    <xacro:include filename="camera.xacro"/>
 
     <xacro:property name="wheel_stride" value="0.150" />    
+    <xacro:property name="camera_size" value="0.03" /> <!-- Size of square 'camera' box -->
 
     <xacro:body/>
     <xacro:wheel parent="base_link" side="left" x_pos="${-wheel_stride}" name="wheel_1_left"/>
@@ -13,6 +15,7 @@
     <xacro:wheel parent="base_link" side="right" x_pos="0" name="wheel_2_right"/>
     <xacro:wheel parent="base_link" side="left" x_pos="${wheel_stride}" name="wheel_3_left"/>
     <xacro:wheel parent="base_link" side="right" x_pos="${wheel_stride}" name="wheel_3_right"/>
+    <xacro:my_camera/>
 
     <gazebo>
         <plugin name="car_plugin" filename="libcar_plugin.so">
