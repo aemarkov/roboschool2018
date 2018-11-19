@@ -47,7 +47,7 @@ void gazebo::CarPlugin::init_ros()
 	// because we can't use ros::spin() in Gazebo
 	_nh = std::make_unique<ros::NodeHandle>();
 	auto so = ros::SubscribeOptions::create<car_msgs::MotorsControl>(
-    			"/vel_cmd",
+    			commands_topic,
       			100,
       			boost::bind(&CarPlugin::velocity_callback, this, _1),
       			ros::VoidPtr(), &_rosQueue);
@@ -79,7 +79,7 @@ void gazebo::CarPlugin::set_speed(const std::vector<physics::JointPtr>& joints, 
 {
 	for(auto& joint: joints)
 	{
-		_model->GetJointController()->SetVelocityTarget(joint->GetScopedName(), speed);
+		_model->GetJointController()->SetVelocityTarget(joint->GetScopedName(), -speed);
 	}
 }
 

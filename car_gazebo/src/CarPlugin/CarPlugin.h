@@ -29,6 +29,8 @@ namespace gazebo
 		ros::Subscriber _cmdSub;
 		std::thread _spin_thread;	
 
+		const std::string commands_topic = "/motors_commands";
+
 		void init_joints(sdf::ElementPtr sdf);
 		void init_ros();
 		void add_wheel(std::vector<physics::JointPtr>& joints, std::string joint_name);
