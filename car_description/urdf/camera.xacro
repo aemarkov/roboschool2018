@@ -27,8 +27,9 @@
 	  </link>
 
 	  <joint name="camera_joint" type="fixed">
-	    <axis xyz="-1 0 0" />
-	    <origin xyz="0.1935 0 0.012" rpy="0 0 0"/>
+	    <axis xyz="0 0 0" />
+	    <!--<origin xyz="0.1935 0 0.012" rpy="0 0 0"/>-->
+	    <origin xyz="-0.1920 0 0.012" rpy="3.14 3.14 0"/>
 	    <parent link="base_link"/>
 	    <child link="camera_link"/>
 	  </joint>
