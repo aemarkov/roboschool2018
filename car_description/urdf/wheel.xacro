@@ -31,8 +31,8 @@
         </link>
         <gazebo reference="${name}">
             <material>Gazebo/DarkGrey</material>
-            <mu1>0.6</mu1>
-            <mu2>0.6</mu2>
+            <!--<mu1>0.6</mu1>
+            <mu2>0.6</mu2>-->
         </gazebo>
 
         <joint name="${name}_joint" type="continuous">
