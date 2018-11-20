@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+    <model name="track">
+        <static>true</static>
+        <link name='track_main'>
+            <pose>0 0 0 0 0 0</pose>
+            <visual name='visual'>
+              <geometry>
+                <mesh>
+                    <uri>model://car_track/meshes/track.dae</uri>
+                </mesh>
+              </geometry>
+            </visual>
+        </link>
+    </model>
+</sdf>
