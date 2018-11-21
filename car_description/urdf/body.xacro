@@ -5,11 +5,8 @@
         <link name="base_link">
             <visual>
                 <geometry>
-                    <mesh filename="package://car_description/meshes/body.stl"/>
+                    <mesh filename="package://car_description/meshes/body.dae"/>
                 </geometry>
-                <material name="white">
-                    <color rgba="0.7 0.7 0.7 1.0"/>
-                </material>
             </visual>
             <collision>
                 <origin xyz="0 0 0.0256" rpy="0 0 0"/>
@@ -24,8 +21,5 @@
                                                        izz="0.04367"/>
             </inertial>
         </link>
-        <gazebo reference="base_link">
-            <material>Gazebo/Grey</material>
-        </gazebo>
     </xacro:macro>
 </robot>

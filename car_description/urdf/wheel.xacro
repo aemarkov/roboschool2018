@@ -10,11 +10,8 @@
         <link name="${name}">
             <visual>                
                 <geometry>
-                    <mesh filename="package://car_description/meshes/wheel_${side}.stl"/>
+                    <mesh filename="package://car_description/meshes/wheel_${side}.dae"/>
                 </geometry>
-                <material name="black">
-                    <color rgba="0.175 .175 .175 1.0"/>
-                </material>
             </visual>
             <collision>
                 <origin xyz="0 ${x_sign * (wheel_width/2 + 0.002)} 0" rpy="1.5707 0 0"/>
@@ -29,11 +26,6 @@
                                                            izz="0.004725"/>
             </inertial>
         </link>
-        <gazebo reference="${name}">
-            <material>Gazebo/DarkGrey</material>
-            <!--<mu1>0.6</mu1>
-            <mu2>0.6</mu2>-->
-        </gazebo>
 
         <joint name="${name}_joint" type="continuous">
             <parent link="${parent}"/>

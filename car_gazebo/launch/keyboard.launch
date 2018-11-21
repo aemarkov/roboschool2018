@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
-    <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    	<arg name="world_name" value="$(find car_gazebo)/worlds/car_empty.sdf"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">    	
         <arg name="paused" value="True"/>
         <arg name="use_sim_time" value="True"/>
     </include>
+    <include file="$(find car_gazebo)/launch/spawn.launch"/>
     <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
     	<param name="speed" value="1.0"/>
     	<param name="turn" value="1.0"/>

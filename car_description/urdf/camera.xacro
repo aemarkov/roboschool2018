@@ -2,34 +2,30 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 	<xacro:macro name="my_camera">	  
-	  <!-- Camera -->
+	  
 	  <link name="camera_link">
-	    <collision>
-	      <!--<origin xyz="0.190 0 ${camera_size}" rpy="0 0 0"/>-->
+	    <collision>	      
 	      <geometry>
 	        <box size="0.007 0.03 0.03"/>
 	      </geometry>
 	    </collision>
 
-	    <visual>
-	      <!--<origin xyz="0.190 0 ${camera_size}" rpy="0 0 0"/>-->
+	    <visual>	      
 	      <geometry>
-	        <box size="0.007 0.03 0.03"/>
+	        <mesh filename="package://car_description/meshes/camera.dae"/>
 	      </geometry>
 	      <material name="red"/>
 	    </visual>
 
 	    <inertial>
-	      <mass value="1e-5" />
-	      <!--<origin xyz="0.190 0 ${camera_size}" rpy="0 0 0"/>-->
+	      <mass value="1e-5" />	      
 	      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
 	    </inertial>
 	  </link>
 
 	  <joint name="camera_joint" type="fixed">
-	    <axis xyz="0 0 0" />
-	    <!--<origin xyz="0.1935 0 0.012" rpy="0 0 0"/>-->
-	    <origin xyz="-0.1920 0 0.012" rpy="3.14 3.14 0"/>
+	    <axis xyz="0 0 0" />	    
+	    <origin xyz="0.185 0 0.012" rpy="0 0 0"/>
 	    <parent link="base_link"/>
 	    <child link="camera_link"/>
 	  </joint>
