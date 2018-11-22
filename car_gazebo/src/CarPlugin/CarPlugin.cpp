@@ -16,7 +16,7 @@ void gazebo::CarPlugin::init_joints(sdf::ElementPtr sdf)
 {
 	add_wheel(_leftWheelsJoints,  "wheel_1_left_joint");
 	add_wheel(_leftWheelsJoints,  "wheel_2_left_joint");
-	add_wheel(_leftWheelsJoints,  "wheel_3_left_joint");
+    add_wheel(_leftWheelsJoints,  "wheel_3_left_joint");
 	add_wheel(_rightWheelsJoints, "wheel_1_right_joint");
 	add_wheel(_rightWheelsJoints, "wheel_2_right_joint");
 	add_wheel(_rightWheelsJoints, "wheel_3_right_joint");
@@ -43,18 +43,10 @@ void gazebo::CarPlugin::init_ros()
 	}
 
 
-	// Manually create callback message and manually call in separate thread,
-	// because we can't use ros::spin() in Gazebo
 	_nh = std::make_unique<ros::NodeHandle>();
-	auto so = ros::SubscribeOptions::create<car_msgs::MotorsControl>(
-    			commands_topic,
-      			100,
-      			boost::bind(&CarPlugin::velocity_callback, this, _1),
-      			ros::VoidPtr(), &_rosQueue);
-
-	_cmdSub = _nh->subscribe(so);
-	_spin_thread = std::thread(&CarPlugin::spin_thread_func, this);
-
+	_cmdSub = _nh->subscribe(COMMANDS_TOPIC, 100, &CarPlugin::velocity_callback, this);
+	_spinner = std::make_unique<ros::AsyncSpinner>(0);
+	_spinner->start();
 	ROS_INFO_STREAM("car_plugin_node started");
 }
 
@@ -78,9 +70,7 @@ void gazebo::CarPlugin::setup_joints(const std::vector<physics::JointPtr>& joint
 void gazebo::CarPlugin::set_speed(const std::vector<physics::JointPtr>& joints, float speed)
 {
 	for(auto& joint: joints)
-	{
-		_model->GetJointController()->SetVelocityTarget(joint->GetScopedName(), -speed);
-	}
+		_model->GetJointController()->SetVelocityTarget(joint->GetScopedName(), speed);
 }
 
 void gazebo::CarPlugin::velocity_callback(const car_msgs::MotorsControl::ConstPtr& msg)
@@ -89,14 +79,7 @@ void gazebo::CarPlugin::velocity_callback(const car_msgs::MotorsControl::ConstPt
 	set_speed(_rightWheelsJoints, msg->right / 255.0f * _maxVelocity);
 }
 
-void gazebo::CarPlugin::spin_thread_func()
-{
-	static const double timeout = 0.01;
-	while (_nh->ok())	
-		_rosQueue.callAvailable(ros::WallDuration(timeout));	
-}
 
 void gazebo::CarPlugin::on_update()
 {
-	//_model->SetLinearVel(ignition::math::Vector3d(0, 0, 0.1));
 }

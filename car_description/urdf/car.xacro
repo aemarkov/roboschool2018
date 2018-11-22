@@ -9,12 +9,12 @@
     <xacro:property name="camera_size" value="0.03" />
 
     <xacro:body/>
-    <xacro:wheel parent="base_link" side="left" x_pos="${-wheel_stride}" name="wheel_1_left"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="${-wheel_stride}" name="wheel_1_right"/>
-    <xacro:wheel parent="base_link" side="left" x_pos="0" name="wheel_2_left"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="0" name="wheel_2_right"/>
-    <xacro:wheel parent="base_link" side="left" x_pos="${wheel_stride}" name="wheel_3_left"/>
-    <xacro:wheel parent="base_link" side="right" x_pos="${wheel_stride}" name="wheel_3_right"/>
+    <xacro:wheel parent="base_link" side="left"  x_pos="${-wheel_stride}" name="wheel_1_left"  z_offset="0.001"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="${-wheel_stride}" name="wheel_1_right" z_offset="0.001"/>
+    <xacro:wheel parent="base_link" side="left"  x_pos="0"                name="wheel_2_left"  z_offset="0"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="0"                name="wheel_2_right" z_offset="0"/>
+    <xacro:wheel parent="base_link" side="left"  x_pos="${wheel_stride}"  name="wheel_3_left"  z_offset="0.001"/>
+    <xacro:wheel parent="base_link" side="right" x_pos="${wheel_stride}"  name="wheel_3_right" z_offset="0.001"/>
     <xacro:my_camera/>
 
     <gazebo>

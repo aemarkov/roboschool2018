@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-    <xacro:macro name="wheel" params="parent side x_pos name">
+    <xacro:macro name="wheel" params="parent side x_pos name z_offset">
 
         <xacro:left_right side="${side}"/>
         <xacro:property name="wheel_width" value="0.06" />
-
 
         <link name="${name}">
             <visual>                
@@ -30,9 +29,14 @@
         <joint name="${name}_joint" type="continuous">
             <parent link="${parent}"/>
             <child  link="${name}"/>
-            <origin xyz="${x_pos} ${x_sign*0.083} 0" rpy="0 0 0"/>
-            <axis xyz="0 -1 0"/>
+            <origin xyz="${x_pos} ${x_sign*0.083} ${z_offset}" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
         </joint>
+
+        <!--<gazebo reference="${name}">
+            <mu1>50</mu1>
+            <mu2>50</mu2>
+        </gazebo>-->
 
     </xacro:macro>    
 </robot>

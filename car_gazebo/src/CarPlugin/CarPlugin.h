@@ -25,11 +25,10 @@ namespace gazebo
 		float _maxVelocity;
 
 		std::unique_ptr<ros::NodeHandle> _nh;
-		ros::CallbackQueue _rosQueue;
+		std::unique_ptr<ros::AsyncSpinner> _spinner;		
 		ros::Subscriber _cmdSub;
-		std::thread _spin_thread;	
 
-		const std::string commands_topic = "/motors_commands";
+		const std::string COMMANDS_TOPIC = "/motors_commands";
 
 		void init_joints(sdf::ElementPtr sdf);
 		void init_ros();
@@ -37,7 +36,6 @@ namespace gazebo
 		void setup_joints(const std::vector<physics::JointPtr>& joints, const common::PID& pid);
 		void set_speed(const std::vector<physics::JointPtr>& joints, float speed);
 		void velocity_callback(const car_msgs::MotorsControl::ConstPtr& msg);
-		void spin_thread_func();
 		void on_update();		
 
 	};

@@ -20,9 +20,8 @@ namespace gazebo
         event::ConnectionPtr _updateConnection;        
 
         std::unique_ptr<ros::NodeHandle> _nh;
-        ros::CallbackQueue _rosQueue;
+        std::unique_ptr<ros::AsyncSpinner> _spinner;
         ros::Subscriber _cmdSub;
-        std::thread _spin_thread;
 
         physics::JointPtr _leftJoint, _rightJoint;
         common::PID _leftPID, _rightPID;
@@ -32,7 +31,6 @@ namespace gazebo
 
         void init_ros();
         void velocity_callback(const car_msgs::MotorsControl::ConstPtr& msg);
-        void spin_thread_func();
         void on_update();       
 
     };

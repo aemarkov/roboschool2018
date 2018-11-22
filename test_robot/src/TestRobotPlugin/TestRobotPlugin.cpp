@@ -18,7 +18,7 @@ void gazebo::TestRobotPlugin::Load(physics::ModelPtr parent, sdf::ElementPtr sdf
 
 void gazebo::TestRobotPlugin::init_ros()
 {   
-    // Init ros node
+    // Инициализация ноды ROS
     if(!ros::isInitialized)
     {
         int argc=0;
@@ -27,21 +27,14 @@ void gazebo::TestRobotPlugin::init_ros()
     }
 
     // Создаем хэндлер ноды
-    _nh = std::make_unique<ros::NodeHandle>();
+    _nh = std::make_unique<ros::NodeHandle>();   
 
-    // Подписываемся на топик команд
-    // Используем свою очередь сообщений, потому что в Gazebo мы не можем
-    // использовать ros::spin()
-    auto so = ros::SubscribeOptions::create<car_msgs::MotorsControl>(
-                COMMANDS_TOPIC,
-                100,
-                boost::bind(&TestRobotPlugin::velocity_callback, this, _1),
-                ros::VoidPtr(), &_rosQueue);
-
-    _cmdSub = _nh->subscribe(so);
-
-    // Запускаем отдельный поток, в котором будет обрабатываться очередь сообщений ROS
-    _spin_thread = std::thread(&TestRobotPlugin::spin_thread_func, this);
+    // Подписываемся на топик
+    _cmdSub = _nh->subscribe(COMMANDS_TOPIC, 100, &TestRobotPlugin::velocity_callback, this);
+    
+    // Запуск внутренних механизмов ROS в отдельном потоке
+    _spinner = std::make_unique<ros::AsyncSpinner>(0);
+    _spinner->start();
 
     ROS_INFO_STREAM("test_robot_plugin_node started");
 }
@@ -53,14 +46,6 @@ void gazebo::TestRobotPlugin::velocity_callback(const car_msgs::MotorsControl::C
     // Устанавливаем угловую скорость джоинтов
     _model->GetJointController()->SetVelocityTarget(_leftJoint->GetScopedName(), msg->left / 255.0f * MAX_ANGULAR_VELOCITY);
     _model->GetJointController()->SetVelocityTarget(_rightJoint->GetScopedName(), msg->right / 255.0f * MAX_ANGULAR_VELOCITY);
-}
-
-// Цикл обработки сообщений ROS и вызова коллбеков
-void gazebo::TestRobotPlugin::spin_thread_func()
-{
-    static const double timeout = 0.01;
-    while (_nh->ok())   
-        _rosQueue.callAvailable(ros::WallDuration(timeout));    
 }
 
 void gazebo::TestRobotPlugin::on_update()
