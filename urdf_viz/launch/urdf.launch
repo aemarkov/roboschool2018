@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Show URDF in RViz -->
 <launch>
 	<param name="robot_description" textfile="$(arg filename)"/>
 	<param name="use_gui" value="true"/>

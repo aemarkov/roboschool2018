@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
+<!-- Load emtpy world with car and keyboard controlling -->
 <launch>
+    <!-- Gazebo -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">    	
         <arg name="paused" value="True"/>
         <arg name="use_sim_time" value="True"/>
     </include>
-    <include file="$(find car_gazebo)/launch/spawn.launch"/>
-    <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
-    	<param name="speed" value="1.0"/>
-    	<param name="turn" value="1.0"/>
-    </node>
-    <node name="twist_to_motors" pkg="car_gazebo" type="twist_to_motors.py" output="screen">
-    	<param name="max_pwm" value="70"/>
-    </node>
+
+    <!-- Load xacro, convert to URDF and spawn-->
+    <include file="$(find roboschool_common)/launch/spawn.launch">
+        <arg name="filename" value="$(find car_description)/urdf/car.xacro"/>
+    </include>
+
+    <!-- Keyboard control -->
+    <include file="$(find roboschool_common)/launch/keyboard.launch"/>
 </launch>

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Load track world with car and keyboard controlling -->
 <launch>
     <!-- Gazebo -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -8,10 +9,14 @@
     </include>
 
     <!-- Load xacro, convert to URDF and spawn-->
-    <include file="$(find car_gazebo)/launch/spawn.launch">
+    <include file="$(find roboschool_common)/launch/spawn.launch">
+        <arg name="filename" value="$(find car_description)/urdf/car.xacro"/>
         <arg name="x" value="-1.89"/>
         <arg name="y" value="-2.2"/>
         <arg name="z" value="0.3"/>
     </include>
+
+    <!-- Keyboard control -->
+    <include file="$(find roboschool_common)/launch/keyboard.launch"/>
 
 </launch>

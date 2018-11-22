@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- Keyboard control for car -->
+<launch>   
+    <!-- Publish geometry_msgs/Twist by keyboard --> 
+    <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
+        <param name="speed" value="1.0"/>
+        <param name="turn" value="1.0"/>
+    </node>
+
+    <!-- Convert geometry_msg/Twist by teleop_twist_keyboard to car_msgs/MotorsControl -->
+    <node name="twist_to_motors" pkg="roboschool_common" type="twist_to_motors.py" output="screen">
+        <param name="max_pwm" value="70"/>
+    </node>
+</launch>
