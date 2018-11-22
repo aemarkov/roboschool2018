@@ -25,7 +25,7 @@ void gazebo::CarPlugin::init_joints(sdf::ElementPtr sdf)
 	float i = sdf->Get<float>("i");
 	float d = sdf->Get<float>("d");
 
-	_leftPID = common::PID(p, i, d);
+	_leftPID = common::PID(p, i, d); // wtf? Is this correct???
 	_rightPID = common::PID(p, i, d);
 
 	setup_joints(_leftWheelsJoints, _leftPID);
@@ -85,8 +85,8 @@ void gazebo::CarPlugin::set_speed(const std::vector<physics::JointPtr>& joints, 
 
 void gazebo::CarPlugin::velocity_callback(const car_msgs::MotorsControl::ConstPtr& msg)
 {
-	set_speed(_leftWheelsJoints, msg->left / 128.0f * _maxVelocity);
-	set_speed(_rightWheelsJoints, msg->right / 128.0f * _maxVelocity);
+	set_speed(_leftWheelsJoints, msg->left / 255.0f * _maxVelocity);
+	set_speed(_rightWheelsJoints, msg->right / 255.0f * _maxVelocity);
 }
 
 void gazebo::CarPlugin::spin_thread_func()
