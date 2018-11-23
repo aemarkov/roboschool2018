@@ -4,6 +4,7 @@ project(car_hackathon)
 set (CMAKE_CXX_STANDARD 14)
 
 find_package(catkin REQUIRED COMPONENTS
+  rospy
   roscpp
   sensor_msgs
   car_msgs
@@ -11,7 +12,10 @@ find_package(catkin REQUIRED COMPONENTS
 )
 find_package(OpenCV)
 
-catkin_package()
+catkin_package(
+  CATKIN_DEPENDS roscpp rospy car_msgs
+  DEPENDS opencv
+)
 
 include_directories(
   ${catkin_INCLUDE_DIRS}
@@ -23,3 +27,4 @@ target_link_libraries(line_mover_cpp
    ${catkin_LIBRARIES}
    ${OpenCV_LIBRARIES}
 )
+add_dependencies(line_mover_cpp ${catkin_EXPORTED_TARGETS})

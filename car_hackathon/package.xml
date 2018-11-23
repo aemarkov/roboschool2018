@@ -14,6 +14,7 @@
   <depend>sensor_msgs</depend>
   <depend>car_msgs</depend>
   <depend>cv_bridge</depend>
+  <depend>opencv</depend>
   <exec_depend>car_description</exec_depend>
   <exec_depend>car_gazebo</exec_depend>
 
