@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:macro name="wheel" params="parent side name">
+
+		<xacro:if value="${side == 'left'}">
+			<xacro:property name="x_sign" value="1" />
+		</xacro:if>
+		<xacro:if value="${side == 'right'}">
+			<xacro:property name="x_sign" value="-1" />
+		</xacro:if>
+
+		<link name="${name}">
+			<visual>
+				<geometry>
+					<cylinder radius="0.2" length="0.1"/>
+				</geometry>
+				<material name="black">
+					<color rgba="0.1 0.1 0.1 1"/>
+				</material>
+			</visual>
+		</link>
+
+		<joint name="${name}_joint" type="continuous">
+			<parent link="${parent}"/>
+			<child link="${name}"/>
+			<origin xyz="0 ${x_sign*0.25} 0" rpy="1.57 0 0"/>
+			<axis xyz="0 0 1"/>
+		</joint>
+
+	</xacro:macro>
+</robot>
