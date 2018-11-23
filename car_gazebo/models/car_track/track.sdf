@@ -11,6 +11,13 @@
                 </mesh>
               </geometry>
             </visual>
+            <collision name='collision'>
+              <geometry>
+                <mesh>
+                    <uri>model://car_track/meshes/track.dae</uri>
+                </mesh>
+              </geometry>
+            </collision>
         </link>
     </model>
 </sdf>

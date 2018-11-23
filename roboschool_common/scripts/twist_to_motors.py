@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+# Converts geometry_msg/Twist to car_msg/MotorsControl
+
 import rospy
 from geometry_msgs.msg import Twist
 from car_msgs.msg import MotorsControl

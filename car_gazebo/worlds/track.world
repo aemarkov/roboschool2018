@@ -3,7 +3,7 @@
     <world name="Car track">    
         <include>
             <uri>model://sun</uri>
-        </include>    
+       </include>    
         <include>
             <uri>model://ground_plane</uri>
         </include>
@@ -12,5 +12,10 @@
             <name>track</name>
             <pose>0 0 0 0 0 0</pose>
         </include>
-  </world>
+        <include>
+            <uri>model://traffic_light</uri>
+            <name>traffic_light</name>
+            <pose>0.43 -0.45 0 0 0 0</pose>
+        </include>
+    </world>
 </sdf>

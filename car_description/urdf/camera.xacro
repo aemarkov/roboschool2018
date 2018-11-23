@@ -34,10 +34,10 @@
         <sensor type="camera" name="camera1">
 	      <update_rate>30.0</update_rate>
 	      <camera name="head">
-	        <horizontal_fov>1.3962634</horizontal_fov>
+	        <horizontal_fov>1.085</horizontal_fov>
 	        <image>
-	          <width>800</width>
-	          <height>800</height>
+	          <width>320</width>
+	          <height>240</height>
 	          <format>R8G8B8</format>
 	        </image>
 	        <clip>
@@ -47,7 +47,7 @@
 	        <noise>
 	          <type>gaussian</type>
 	          <mean>0.0</mean>
-	          <stddev>0.007</stddev>
+	          <stddev>0.012</stddev>
 	        </noise>
 	      </camera>
 	      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">

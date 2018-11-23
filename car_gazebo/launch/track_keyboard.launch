@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Load track world with car and keyboard controlling -->
+<launch>
+    <include file="$(find car_gazebo)/launch/track.launch"/>
+
+    <!-- Keyboard control -->
+    <include file="$(find roboschool_common)/launch/keyboard.launch"/>
+
+</launch>
