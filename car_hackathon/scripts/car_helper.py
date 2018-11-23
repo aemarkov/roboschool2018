@@ -1,33 +1,34 @@
 #coding=utf-8
 ##########################
-#           ROS          #
+#      RASPBERRY PI      #
 ##########################
 
-import rospy
-from car_msgs.msg import MotorsControl
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
+import serial
+from picamera.array import PiRGBArray
+from picamera import PiCamera
 
 MAX_PWM = 255
 
 class CarHelper:
     def __init__(self, callback):
-        rospy.init_node('line_mover')
+        self.uart = serial.Serial('/dev/ttyAMA0', 9600)
         self.callback = callback
-        self.bridge = CvBridge()
-        self.pub = rospy.Publisher('/motors_commands', MotorsControl, queue_size = 10)
-        self.sub = rospy.Subscriber('/car_gazebo/camera1/image_raw', Image, self.image_callback)   
+        size = (320, 240)
+        self.camera = PiCamera()
+        self.camera.vflip = True
+        self.camera.hflip = True
+        self.camera.resolution = size
+        self.capture = PiRGBArray(self.camera, size=size)   
 
     def run(self):
-        rate = rospy.Rate(30)
         try:
-            while True:
-                rate.sleep()
+            for frame in self.camera.capture_continuous(self.capture, format="bgr", use_video_port=True):
+                image = frame.array
+                self.callback(image)
+                self.capture.truncate(0)
         except:
             pass
         finally:
-            # В общем, это не работает :(
-            rospy.loginfo('Stopping')
             self.motors(0,0)
 
     def image_callback(self, msg):
@@ -42,7 +43,4 @@ class CarHelper:
         return pwm
 
     def motors(self, l, r):
-        msg = MotorsControl()
-        msg.left = self.truncate(l)
-        msg.right = self.truncate(r)
-        self.publish(msg)
+        self.uart.write(('L{};R{};'.format(self.truncate(l), self.truncate(r))).encode('ASCII'))

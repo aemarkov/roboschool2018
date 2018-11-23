@@ -21,3 +21,24 @@
  - проехать по линии не выходя за границы трассы - 20б
  - остановиться на светофоре - 20б
  - повернуть на перекрестке - 20б
+
+## Запуск на Gazebo
+```bash
+roslaunch car_gazebo track.launch
+```
+
+```bash
+rosrun car_hackathon line_mover.py # Писать код тут
+```
+
+Управление светофором:
+```bash
+rosrun car_gazebo controller.py
+```
+
+## Запуск на Raspberry Pi
+ - скопировать `line_mover.py` на raspberry
+ - подключиться по ssh
+ - python3 line_mover.py
+ - ???
+ - PROFIT!
