@@ -1,1 +1,2 @@
 *.blend1 # blender backup files
+*.pyc

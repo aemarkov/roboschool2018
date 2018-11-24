@@ -5,12 +5,11 @@ import cv2
 import numpy as np
 
 def image_callback(image):
-    print('callback')
     # ----------------------------------
     helper.motors(40, 40)
             
-    #cv2.imshow('img', image)
-    #cv2.waitKey(1)
+    cv2.imshow('img', image)
+    cv2.waitKey(1)
     # ----------------------------------
 
 if __name__ == '__main__':
